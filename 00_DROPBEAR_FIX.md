@@ -2,9 +2,9 @@
 
 ## 概要
 
-これらの差分ファイルは、 [Debian noroot 環境][DBNR]において、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear-2017.75][DR17] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 Debian noroot 環境において正常に動作させる為の差分ファイルです。
+これらの差分ファイルは、 [Debian noroot 環境][DBNR]において、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear-2017.75][DR17] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
 
-これらの差分ファイルでは、 Android OS 5.0 における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
+これらの差分ファイルでは、 [Android OS 5.0][ANDR] における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
 
 また、 [github 上の dropbear][DRRP] においては、公開鍵暗号を用いた認証における不具合について bug fix を行っています。
 
@@ -44,6 +44,7 @@
 <!-- 外部リンク一覧 -->
 
 [DBNR]:https://play.google.com/store/apps/details?id=com.cuntubuntu&hl=ja
+[ANDR]:https://www.android.com/intl/ja_jp/
 [DROP]:https://matt.ucc.asn.au/dropbear/dropbear.html
 [DR17]:https://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2
 [LINK]:http://man7.org/linux/man-pages/man2/link.2.html
