@@ -12,7 +12,24 @@
 
 [dropbear][DROP] のソースコードに差分ファイルを適用するには、安定版の [dropbear-2017.75][DR17] には、差分ファイル ```dropbear-2017.75-fix.diff``` を、[github 上の dropbear][DRRP] には、差分ファイル ```dropbear-HEAD-a5ec3aca.diff``` をそれぞれ適用して下さい。
 
-なお、これらの差分ファイルを適用した [dropbear][DROP] のソースコードを [Debian noroot 環境][DBNR]においてコンパイルするには、環境変数 ```CFLAGS``` に ```-DDEBIAN_NOROOT``` を設定する必要があります。
+例えば、安定版の [dropbear-2017.75][DR17] のソースコードに ```dropbear-2017.75-fix.diff``` を適用するには、安定版の [dropbear-2017.75][DR17] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-2017.75-fix.diff``` を適用します。
+
+```
+ $ patch -p1 < /path/to/dropbear-2017.75-fix.diff
+ (ここに、/path/to/diff は、 dropbear-2017.75-fix.diff が置かれたディレクトリのパス名)
+```
+そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-a5ec3aca-fix.diff``` を適用するには、安定版の [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-a5ec3aca-fix.diff``` を適用します。
+
+```
+ $ patch -p1 < /path/to/dropbear-HEAD-a5ec3aca-fix.diff
+ (ここに、/path/to/diff は、 dropbear-HEAD-a5ec3aca-fix.diff が置かれたディレクトリのパス名)
+```
+
+なお、これらの差分ファイルを適用した [dropbear][DROP] のソースコードを [Debian noroot 環境][DBNR]においてコンパイルするには、```./configure``` コマンドの実行時に以下のようにして、環境変数 ```CFLAGS``` に ```-DDEBIAN_NOROOT``` を設定する必要があります。
+
+```
+ $ CFLAGS="-DDEBIAN_NOROOT" ./configure --prefix=...  # (以下、適宜オプションを設定すること。)
+```
 
 ## 謝辞
 
