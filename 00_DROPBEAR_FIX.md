@@ -16,11 +16,11 @@
  $ patch -p1 < /path/to/dropbear-2017.75-fix.diff
  (ここに、/path/to/diff は、 dropbear-2017.75-fix.diff が置かれたディレクトリのパス名)
 ```
-そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-a5ec3aca-fix.diff``` を適用するには、安定版の [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-a5ec3aca-fix.diff``` を適用します。
+そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-8ffa8f72.diff``` を適用するには、安定版の [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` を適用します。
 
 ```
- $ patch -p1 < /path/to/dropbear-HEAD-a5ec3aca-fix.diff
- (ここに、/path/to/diff は、 dropbear-HEAD-a5ec3aca-fix.diff が置かれたディレクトリのパス名)
+ $ patch -p1 < /path/to/dropbear-HEAD-8ffa8f72.diff
+ (ここに、/path/to/diff は、 dropbear-HEAD-8ffa8f72.diff が置かれたディレクトリのパス名)
 ```
 
 なお、これらの差分ファイルを適用した [dropbear][DROP] のソースコードを [Debian noroot 環境][DBNR]においてコンパイルするには、```./configure``` コマンドの実行時に以下のようにして、環境変数 ```CFLAGS``` に ```-DDEBIAN_NOROOT``` を設定する必要があります。
@@ -41,7 +41,7 @@
 
 ### 2018/02/03 の追記
 
-[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` を追加し、 obsolute となった差分ファイルを削除しました。どうか御了承下さい。
+[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` を追加し、 obsolute となった差分ファイル ```dropbear-HEAD-a5ec3aca.diff```を削除しました。どうか御了承下さい。
 
 <!-- 外部リンク一覧 -->
 
