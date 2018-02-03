@@ -8,7 +8,7 @@
 
 ## 差分ファイルの適用とコンパイル
 
-[dropbear][DROP] のソースコードに差分ファイルを適用するには、安定版の [dropbear-2017.75][DR17] には、差分ファイル ```dropbear-2017.75-fix.diff``` を、[github 上の dropbear][DRRP] には、差分ファイル ```dropbear-HEAD-a5ec3aca.diff``` をそれぞれ適用して下さい。
+[dropbear][DROP] のソースコードに差分ファイルを適用するには、安定版の [dropbear-2017.75][DR17] には、差分ファイル ```dropbear-2017.75-fix.diff``` を、[github 上の dropbear][DRRP] には、差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` をそれぞれ適用して下さい。
 
 例えば、安定版の [dropbear-2017.75][DR17] のソースコードに ```dropbear-2017.75-fix.diff``` を適用するには、安定版の [dropbear-2017.75][DR17] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-2017.75-fix.diff``` を適用します。
 
