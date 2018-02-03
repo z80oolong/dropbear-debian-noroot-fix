@@ -6,8 +6,6 @@
 
 これらの差分ファイルでは、 [Android OS 5.0][ANDR] における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
 
-また、 [github 上の dropbear][DRRP] においては、公開鍵暗号を用いた認証における不具合について bug fix を行っています。
-
 ## 差分ファイルの適用とコンパイル
 
 [dropbear][DROP] のソースコードに差分ファイルを適用するには、安定版の [dropbear-2017.75][DR17] には、差分ファイル ```dropbear-2017.75-fix.diff``` を、[github 上の dropbear][DRRP] には、差分ファイル ```dropbear-HEAD-a5ec3aca.diff``` をそれぞれ適用して下さい。
@@ -40,6 +38,10 @@
 ### 2017/08/27 の追記
 
 安定版の [dropbear][DROP] である [dropbear-2017.75][DR17] の差分ファイルに誤りがありましたので、訂正を行いました。
+
+### 2018/02/03 の追記
+
+[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` を追加し、 obsolute となった差分ファイルを削除しました。どうか御了承下さい。
 
 <!-- 外部リンク一覧 -->
 

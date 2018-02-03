@@ -61,7 +61,7 @@ index 8317fea..4006e60 100644
  out:
  	if (buf) {
 diff --git a/signkey.c b/signkey.c
-index 58db46b..3bbdc5e 100644
+index 682d445..489428c 100644
 --- a/signkey.c
 +++ b/signkey.c
 @@ -620,6 +620,7 @@ int cmp_base64_key(const unsigned char* keyblob, unsigned int keybloblen,
@@ -141,7 +141,7 @@ index fceb7fd..eff9758 100644
 +#endif /* DEBIAN_NOROOT */
  }
 diff --git a/svr-agentfwd.c b/svr-agentfwd.c
-index d88f203..1a913ce 100644
+index 6289b87..a64257c 100644
 --- a/svr-agentfwd.c
 +++ b/svr-agentfwd.c
 @@ -218,10 +218,12 @@ static int bindagent(int fd, struct ChanSess * chansess) {
@@ -158,15 +158,14 @@ index d88f203..1a913ce 100644
  	memset((void*)&addr, 0x0, sizeof(addr));
  	addr.sun_family = AF_UNIX;
 diff --git a/svr-authpubkey.c b/svr-authpubkey.c
-index fbee63f..583efc7 100644
+index 8905ac9..007dae3 100644
 --- a/svr-authpubkey.c
 +++ b/svr-authpubkey.c
-@@ -363,6 +363,8 @@ static int checkpubkey(char* algo, unsigned int algolen,
+@@ -363,6 +363,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
  
- 		if (checkpubkey_line(line, line_num, filename,
- 				algo, algolen, keyblob, keybloblen) == DROPBEAR_SUCCESS) {
+ 		ret = checkpubkey_line(line, line_num, filename, algo, algolen, keyblob, keybloblen);
+ 		if (ret == DROPBEAR_SUCCESS) {
 +			TRACE(("checkpubkey: pubkey auth OK."))
-+			ret = DROPBEAR_SUCCESS;
  			break;
  		}
  
