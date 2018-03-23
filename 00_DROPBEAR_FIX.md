@@ -41,7 +41,11 @@
 
 ### 2018/02/03 の追記
 
-[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` を追加し、 obsolute となった差分ファイル ```dropbear-HEAD-a5ec3aca.diff```を削除しました。どうか御了承下さい。
+[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-8ffa8f72-fix.diff``` を追加し、 obsolute となった差分ファイル ```dropbear-HEAD-a5ec3aca-fix.diff```を削除しました。どうか御了承下さい。
+
+### 2018/03/23 の追記
+
+[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-d740dc54-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-8ffa8f72-fix.diff```を削除しました。どうか御了承下さい。
 
 <!-- 外部リンク一覧 -->
 

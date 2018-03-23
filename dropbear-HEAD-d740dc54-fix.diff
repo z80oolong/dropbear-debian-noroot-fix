@@ -1,36 +1,53 @@
 diff --git a/default_options.h b/default_options.h
-index 039d785..8f62ac2 100644
+index 86fb25a..08dbaa7 100644
 --- a/default_options.h
 +++ b/default_options.h
-@@ -15,8 +15,12 @@ Options can also be defined with -DDROPBEAR_XXX in Makefile CFLAGS
- IMPORTANT: Many options will require "make clean" after changes */
+@@ -13,7 +13,13 @@ Options can also be defined with -DDROPBEAR_XXX=[0,1] in Makefile CFLAGS
  
- #ifndef DROPBEAR_DEFPORT
+ IMPORTANT: Some options will require "make clean" after changes */
+ 
++#ifndef DROPBEAR_DEFPORT
 +#ifdef DEBIAN_NOROOT
 +#define DROPBEAR_DEFPORT "8022"
 +#else
  #define DROPBEAR_DEFPORT "22"
- #endif
 +#endif
- 
- /* Listen on all interfaces */
- #ifndef DROPBEAR_DEFADDRESS
-diff --git a/default_options.h.in b/default_options.h.in
-index c44fb97..ddc80d1 100644
---- a/default_options.h.in
-+++ b/default_options.h.in
-@@ -14,7 +14,11 @@ Options can also be defined with -DDROPBEAR_XXX in Makefile CFLAGS
- 
- IMPORTANT: Many options will require "make clean" after changes */
- 
-+#ifdef DEBIAN_NOROOT
-+#define DROPBEAR_DEFPORT "8022"
-+#else
- #define DROPBEAR_DEFPORT "22"
 +#endif
  
  /* Listen on all interfaces */
  #define DROPBEAR_DEFADDRESS ""
+@@ -44,7 +50,9 @@ IMPORTANT: Some options will require "make clean" after changes */
+  * several kB in binary size however will make the symmetrical ciphers and hashes
+  * slower, perhaps by 50%. Recommended for small systems that aren't doing
+  * much traffic. */
++#ifndef DROPBEAR_SMALL_CODE
+ #define DROPBEAR_SMALL_CODE 1
++#endif
+ 
+ /* Enable X11 Forwarding - server only */
+ #define DROPBEAR_X11FWD 1
+@@ -187,7 +195,21 @@ group1 in Dropbear server too */
+  * but there's an interface via a PAM module. It won't work for more complex
+  * PAM challenge/response.
+  * You can't enable both PASSWORD and PAM. */
++
++/* This requires crypt() */
++#ifdef HAVE_CRYPT
++#ifndef DROPBEAR_SVR_PASSWORD_AUTH
++#define DROPBEAR_SVR_PASSWORD_AUTH 1
++#endif
++#else
++#ifndef DROPBEAR_SVR_PASSWORD_AUTH
++#define DROPBEAR_SVR_PASSWORD_AUTH 0
++#endif
++#endif
++/* PAM requires ./configure --enable-pam */
++#ifndef DROPBEAR_SVR_PAM_AUTH
+ #define DROPBEAR_SVR_PAM_AUTH 0
++#endif
+ 
+ /* ~/.ssh/authorized_keys authentication */
+ #define DROPBEAR_SVR_PUBKEY_AUTH 1
 diff --git a/gensignkey.c b/gensignkey.c
 index 8317fea..4006e60 100644
 --- a/gensignkey.c
@@ -61,10 +78,10 @@ index 8317fea..4006e60 100644
  out:
  	if (buf) {
 diff --git a/signkey.c b/signkey.c
-index 682d445..489428c 100644
+index 88f06c7..150be82 100644
 --- a/signkey.c
 +++ b/signkey.c
-@@ -620,6 +620,7 @@ int cmp_base64_key(const unsigned char* keyblob, unsigned int keybloblen,
+@@ -624,6 +624,7 @@ int cmp_base64_key(const unsigned char* keyblob, unsigned int keybloblen,
  out:
  	buf_free(decodekey);
  	decodekey = NULL;
@@ -158,10 +175,10 @@ index 6289b87..a64257c 100644
  	memset((void*)&addr, 0x0, sizeof(addr));
  	addr.sun_family = AF_UNIX;
 diff --git a/svr-authpubkey.c b/svr-authpubkey.c
-index 8905ac9..007dae3 100644
+index ec14ec0..017c678 100644
 --- a/svr-authpubkey.c
 +++ b/svr-authpubkey.c
-@@ -363,6 +363,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
+@@ -372,6 +372,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
  
  		ret = checkpubkey_line(line, line_num, filename, algo, algolen, keyblob, keybloblen);
  		if (ret == DROPBEAR_SUCCESS) {
