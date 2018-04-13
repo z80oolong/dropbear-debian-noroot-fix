@@ -45,7 +45,11 @@
 
 ### 2018/03/23 の追記
 
-[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-d740dc54-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-8ffa8f72-fix.diff```を削除しました。どうか御了承下さい。
+[github 上の dropbear][DRRP] の HEAD の commit である d740dc54 に対応した差分ファイル ```dropbear-HEAD-d740dc54-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-8ffa8f72-fix.diff```を削除しました。どうか御了承下さい。
+
+### 2017/04/13 の追記
+
+安定版の [dropbear][DROP] である [dropbear-2018.76][DR18] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。
 
 <!-- 外部リンク一覧 -->
 
@@ -53,6 +57,7 @@
 [ANDR]:https://www.android.com/intl/ja_jp/
 [DROP]:https://matt.ucc.asn.au/dropbear/dropbear.html
 [DR17]:https://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2
+[DR18]:https://matt.ucc.asn.au/dropbear/releases/dropbear-2018.76.tar.bz2
 [LINK]:http://man7.org/linux/man-pages/man2/link.2.html
 [DRRP]:https://github.com/mkj/dropbear
 [TERM]:https://termux.com/
