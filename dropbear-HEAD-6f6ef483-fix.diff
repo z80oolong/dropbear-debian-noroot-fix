@@ -175,10 +175,10 @@ index 6289b87..a64257c 100644
  	memset((void*)&addr, 0x0, sizeof(addr));
  	addr.sun_family = AF_UNIX;
 diff --git a/svr-authpubkey.c b/svr-authpubkey.c
-index ec14ec0..017c678 100644
+index ae1402d..b644f84 100644
 --- a/svr-authpubkey.c
 +++ b/svr-authpubkey.c
-@@ -372,6 +372,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
+@@ -381,6 +381,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
  
  		ret = checkpubkey_line(line, line_num, filename, algo, algolen, keyblob, keybloblen);
  		if (ret == DROPBEAR_SUCCESS) {

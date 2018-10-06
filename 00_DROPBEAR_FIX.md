@@ -51,6 +51,10 @@
 
 安定版の [dropbear][DROP] である [dropbear-2018.76][DR18] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。
 
+### 2018/10/06 の追記
+
+[github 上の dropbear][DRRP] の HEAD の commit である 6f6ef483 に対応した差分ファイル ```dropbear-HEAD-6f6ef483-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-d740dc54-fix.diff```を削除しました。どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [DBNR]:https://play.google.com/store/apps/details?id=com.cuntubuntu&hl=ja
