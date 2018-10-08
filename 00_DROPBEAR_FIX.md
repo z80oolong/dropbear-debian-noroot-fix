@@ -2,25 +2,25 @@
 
 ## 概要
 
-これらの差分ファイルは、 [Debian noroot 環境][DBNR]において、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear-2017.75][DR17] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
+これらの差分ファイルは、 [Debian noroot 環境][DBNR]において、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear][DROP] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
 
-これらの差分ファイルでは、 [Android OS 5.0][ANDR] における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
+これらの差分ファイルでは、 [Android OS 5.0 以降][ANDR] における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
 
 ## 差分ファイルの適用とコンパイル
 
-[dropbear][DROP] のソースコードに差分ファイルを適用するには、安定版の [dropbear-2017.75][DR17] には、差分ファイル ```dropbear-2017.75-fix.diff``` を、[github 上の dropbear][DRRP] には、差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` をそれぞれ適用して下さい。
+[dropbear][DROP] のソースコードに差分ファイルを適用するには、安定版の [dropbear][DROP] には、差分ファイル ```dropbear-x.y-fix.diff (ここに、 x.y は安定版のバージョン番号)``` を、[github 上の dropbear][DRRP] には、差分ファイル ```dropbear-HEAD-xxxxxxxx-fix.diff (ここに、 xxxxxxxx は、リビジョン番号)``` をそれぞれ適用して下さい。
 
-例えば、安定版の [dropbear-2017.75][DR17] のソースコードに ```dropbear-2017.75-fix.diff``` を適用するには、安定版の [dropbear-2017.75][DR17] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-2017.75-fix.diff``` を適用します。
-
-```
- $ patch -p1 < /path/to/dropbear-2017.75-fix.diff
- (ここに、/path/to/diff は、 dropbear-2017.75-fix.diff が置かれたディレクトリのパス名)
-```
-そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-8ffa8f72.diff``` を適用するには、安定版の [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-8ffa8f72.diff``` を適用します。
+例えば、安定版の [dropbear][DROP] のソースコードに ```dropbear-x.y-fix.diff``` を適用するには、安定版の [dropbear][DROP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-x.y-fix.diff``` を適用します。
 
 ```
- $ patch -p1 < /path/to/dropbear-HEAD-8ffa8f72.diff
- (ここに、/path/to/diff は、 dropbear-HEAD-8ffa8f72.diff が置かれたディレクトリのパス名)
+ $ patch -p1 < /path/to/dropbear-x.y-fix.diff
+ (ここに、/path/to/diff は、 dropbear-x.y-fix.diff が置かれたディレクトリのパス名)
+```
+そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-xxxxxxxx.diff``` を適用するには、安定版の [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-xxxxxxxx.diff``` を適用します。
+
+```
+ $ patch -p1 < /path/to/dropbear-HEAD-xxxxxxxx.diff
+ (ここに、/path/to/diff は、 dropbear-HEAD-xxxxxxxx.diff が置かれたディレクトリのパス名)
 ```
 
 なお、これらの差分ファイルを適用した [dropbear][DROP] のソースコードを [Debian noroot 環境][DBNR]においてコンパイルするには、```./configure``` コマンドの実行時に以下のようにして、環境変数 ```CFLAGS``` に ```-DDEBIAN_NOROOT``` を設定する必要があります。
