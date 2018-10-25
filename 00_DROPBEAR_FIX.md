@@ -16,7 +16,7 @@
  $ patch -p1 < /path/to/dropbear-x.y-fix.diff
  (ここに、/path/to/diff は、 dropbear-x.y-fix.diff が置かれたディレクトリのパス名)
 ```
-そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-xxxxxxxx.diff``` を適用するには、安定版の [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-xxxxxxxx.diff``` を適用します。
+そして、 [github 上の dropbear][DRRP] のソースコードに ```dropbear-HEAD-xxxxxxxx.diff``` を適用するには、 [github 上の dropbear][DRRP] のソースコードが置かれているディレクトリより、以下のようにして差分ファイル ```dropbear-HEAD-xxxxxxxx.diff``` を適用します。
 
 ```
  $ patch -p1 < /path/to/dropbear-HEAD-xxxxxxxx.diff
