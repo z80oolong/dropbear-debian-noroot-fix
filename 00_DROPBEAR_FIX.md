@@ -2,7 +2,7 @@
 
 ## 概要
 
-これらの差分ファイルは、 [Debian noroot 環境][DBNR]において、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear][DROP] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
+これらの差分ファイルは、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear][DROP] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
 
 これらの差分ファイルでは、 [Android OS 5.0 以降][ANDR] における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
 
