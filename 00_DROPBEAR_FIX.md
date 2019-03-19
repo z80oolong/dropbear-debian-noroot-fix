@@ -55,6 +55,10 @@
 
 [github 上の dropbear][DRRP] の HEAD の commit である 6f6ef483 に対応した差分ファイル ```dropbear-HEAD-6f6ef483-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-d740dc54-fix.diff```を削除しました。どうか御了承下さい。
 
+### 2019/03/19 の追記
+
+[github 上の dropbear][DRRP] の HEAD の commit である cb945f9f に対応した差分ファイル ```dropbear-HEAD-cb945f9f-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-2017.75-fix.diff, dropbear-HEAD-6f6ef483-fix.diff```を削除しました。どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [DBNR]:https://play.google.com/store/apps/details?id=com.cuntubuntu&hl=ja
