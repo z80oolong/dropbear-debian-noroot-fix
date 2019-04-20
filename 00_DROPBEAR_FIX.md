@@ -37,7 +37,7 @@
 
 ### 2017/08/27 の追記
 
-安定版の [dropbear][DROP] である [dropbear-2017.75][DR17] の差分ファイルに誤りがありましたので、訂正を行いました。
+安定版の [dropbear][DROP] である [dropbear-2017.75][DROP] の差分ファイルに誤りがありましたので、訂正を行いました。
 
 ### 2018/02/03 の追記
 
@@ -49,7 +49,7 @@
 
 ### 2017/04/13 の追記
 
-安定版の [dropbear][DROP] である [dropbear-2018.76][DR18] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。
+安定版の [dropbear][DROP] である [dropbear-2018.76][DROP] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。
 
 ### 2018/10/06 の追記
 
@@ -63,13 +63,15 @@
 
 [github 上の dropbear][DRRP] の HEAD の commit である cb945f9f に対応した差分ファイル ```dropbear-HEAD-cae6e6af-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-cb945f9f-fix.diff```を削除しました。どうか御了承下さい。
 
+### 2019/04/20 の追記
+
+安定版の [dropbear][DROP] である [dropbear-2019.78][DROP] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-2018.76-fix.diff```を削除しました。どうか御了承下さい。
+
 <!-- 外部リンク一覧 -->
 
 [DBNR]:https://play.google.com/store/apps/details?id=com.cuntubuntu&hl=ja
 [ANDR]:https://www.android.com/intl/ja_jp/
 [DROP]:https://matt.ucc.asn.au/dropbear/dropbear.html
-[DR17]:https://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2
-[DR18]:https://matt.ucc.asn.au/dropbear/releases/dropbear-2018.76.tar.bz2
 [LINK]:http://man7.org/linux/man-pages/man2/link.2.html
 [DRRP]:https://github.com/mkj/dropbear
 [TERM]:https://termux.com/

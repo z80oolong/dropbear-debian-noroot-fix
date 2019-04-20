@@ -1,5 +1,5 @@
 diff --git a/default_options.h b/default_options.h
-index 3b75eb8..c36622d 100644
+index 9000fcc..34ef067 100644
 --- a/default_options.h
 +++ b/default_options.h
 @@ -13,7 +13,13 @@ Options can also be defined with -DDROPBEAR_XXX=[0,1] in Makefile CFLAGS
@@ -78,10 +78,10 @@ index 8317fea..4006e60 100644
  out:
  	if (buf) {
 diff --git a/signkey.c b/signkey.c
-index d33ef44..140f1a6 100644
+index 88f06c7..150be82 100644
 --- a/signkey.c
 +++ b/signkey.c
-@@ -620,6 +620,7 @@ int cmp_base64_key(const unsigned char* keyblob, unsigned int keybloblen,
+@@ -624,6 +624,7 @@ int cmp_base64_key(const unsigned char* keyblob, unsigned int keybloblen,
  out:
  	buf_free(decodekey);
  	decodekey = NULL;
@@ -158,10 +158,10 @@ index fceb7fd..eff9758 100644
 +#endif /* DEBIAN_NOROOT */
  }
 diff --git a/svr-agentfwd.c b/svr-agentfwd.c
-index 6289b87..a64257c 100644
+index ac9475f..ff605e5 100644
 --- a/svr-agentfwd.c
 +++ b/svr-agentfwd.c
-@@ -218,10 +218,12 @@ static int bindagent(int fd, struct ChanSess * chansess) {
+@@ -224,10 +224,12 @@ static int bindagent(int fd, struct ChanSess * chansess) {
  	/* drop to user privs to make the dir/file */
  	uid = getuid();
  	gid = getgid();
@@ -170,15 +170,15 @@ index 6289b87..a64257c 100644
  		(seteuid(ses.authstate.pw_uid)) < 0) {
  		dropbear_exit("Failed to set euid");
  	}
-+#endif /* DEBIAN_NOROOT */
++#endif /* DEBIAN_NOROOT	*/
+ #endif
  
  	memset((void*)&addr, 0x0, sizeof(addr));
- 	addr.sun_family = AF_UNIX;
 diff --git a/svr-authpubkey.c b/svr-authpubkey.c
-index aa6087c..4790467 100644
+index 4f27986..3500fe3 100644
 --- a/svr-authpubkey.c
 +++ b/svr-authpubkey.c
-@@ -363,6 +363,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
+@@ -385,6 +385,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
  
  		ret = checkpubkey_line(line, line_num, filename, algo, algolen, keyblob, keybloblen);
  		if (ret == DROPBEAR_SUCCESS) {
