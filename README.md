@@ -2,7 +2,7 @@
 
 ## 概要
 
-これらの差分ファイルは、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear][DROP] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
+この差分ファイルは、軽量な SSH サーバである [dropbear][DROP] のうち、安定版の [dropbear][DROP] 及び [github 上の dropbear][DRRP] において、一部 bug fix を行い、 [Debian noroot 環境][DBNR]において正常に動作させる為の差分ファイルです。
 
 これらの差分ファイルでは、 [Android OS 5.0 以降][ANDR] における [Debian noroot 環境][DBNR]において、擬似端末デバイスファイルである ```/dev/pts/*``` の所有権及び権限の変更が出来ない制約を回避し、また、システムコール [```link(2)```][LINK] の実行を回避しています。
 
@@ -33,39 +33,13 @@
 
 なお、これらの差分ファイルの作成に当たっては、 [termux の開発コミュニティ][TERM] による差分ファイルを参考にしました。 [termux の開発コミュニティ][TERM]の皆様には心より感謝致します。
 
-## 追記
+最後に、 [Matt Johnston 氏を始めとした dropbear の開発コミュニティの関係各位][DROP]及び [dropbear][DROP] に関わった方々の全てに心より感謝致します。
 
-### 2017/08/27 の追記
+## 使用条件
 
-安定版の [dropbear][DROP] である [dropbear-2017.75][DROP] の差分ファイルに誤りがありましたので、訂正を行いました。
+本差分ファイルは軽量な SSH サーバである [dropbear][DROP] に適用する差分ファイルであり、 [Z.OOL. (mailto:zool@zool.jpn.org)][ZOOL] が著作権を有します。
 
-### 2018/02/03 の追記
-
-[github 上の dropbear][DRRP] の HEAD の commit である 8ffa8f72 に対応した差分ファイル ```dropbear-HEAD-8ffa8f72-fix.diff``` を追加し、 obsolute となった差分ファイル ```dropbear-HEAD-a5ec3aca-fix.diff```を削除しました。どうか御了承下さい。
-
-### 2018/03/23 の追記
-
-[github 上の dropbear][DRRP] の HEAD の commit である d740dc54 に対応した差分ファイル ```dropbear-HEAD-d740dc54-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-8ffa8f72-fix.diff```を削除しました。どうか御了承下さい。
-
-### 2017/04/13 の追記
-
-安定版の [dropbear][DROP] である [dropbear-2018.76][DROP] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。
-
-### 2018/10/06 の追記
-
-[github 上の dropbear][DRRP] の HEAD の commit である 6f6ef483 に対応した差分ファイル ```dropbear-HEAD-6f6ef483-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-d740dc54-fix.diff```を削除しました。どうか御了承下さい。
-
-### 2019/03/19 の追記
-
-[github 上の dropbear][DRRP] の HEAD の commit である cb945f9f に対応した差分ファイル ```dropbear-HEAD-cb945f9f-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-2017.75-fix.diff, dropbear-HEAD-6f6ef483-fix.diff```を削除しました。どうか御了承下さい。
-
-### 2019/04/19 の追記
-
-[github 上の dropbear][DRRP] の HEAD の commit である cb945f9f に対応した差分ファイル ```dropbear-HEAD-cae6e6af-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-HEAD-cb945f9f-fix.diff```を削除しました。どうか御了承下さい。
-
-### 2019/04/20 の追記
-
-安定版の [dropbear][DROP] である [dropbear-2019.78][DROP] に対応した差分ファイル ```dropbear-2018.76-fix.diff``` を追加しました。これに伴い、差分ファイル ```dropbear-2018.76-fix.diff```を削除しました。どうか御了承下さい。
+従って、本差分ファイルは [dropbear][DROP] のライセンスと同様である [MIT License][MITL] に基づいて配布されるものとします。詳細については、本リポジトリに同梱する ```LICENSE``` を参照して下さい。
 
 <!-- 外部リンク一覧 -->
 
@@ -75,3 +49,5 @@
 [LINK]:http://man7.org/linux/man-pages/man2/link.2.html
 [DRRP]:https://github.com/mkj/dropbear
 [TERM]:https://termux.com/
+[ZOOL]:http://zool.jpn.org/
+[MITL]:http://www.opensource.org/licenses/mit-license.php

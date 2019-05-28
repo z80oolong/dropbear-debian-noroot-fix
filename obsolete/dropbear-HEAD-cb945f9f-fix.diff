@@ -1,0 +1,188 @@
+diff --git a/default_options.h b/default_options.h
+index 86fb25a..08dbaa7 100644
+--- a/default_options.h
++++ b/default_options.h
+@@ -13,7 +13,13 @@ Options can also be defined with -DDROPBEAR_XXX=[0,1] in Makefile CFLAGS
+ 
+ IMPORTANT: Some options will require "make clean" after changes */
+ 
++#ifndef DROPBEAR_DEFPORT
++#ifdef DEBIAN_NOROOT
++#define DROPBEAR_DEFPORT "8022"
++#else
+ #define DROPBEAR_DEFPORT "22"
++#endif
++#endif
+ 
+ /* Listen on all interfaces */
+ #define DROPBEAR_DEFADDRESS ""
+@@ -44,7 +50,9 @@ IMPORTANT: Some options will require "make clean" after changes */
+  * several kB in binary size however will make the symmetrical ciphers and hashes
+  * slower, perhaps by 50%. Recommended for small systems that aren't doing
+  * much traffic. */
++#ifndef DROPBEAR_SMALL_CODE
+ #define DROPBEAR_SMALL_CODE 1
++#endif
+ 
+ /* Enable X11 Forwarding - server only */
+ #define DROPBEAR_X11FWD 1
+@@ -187,7 +195,21 @@ group1 in Dropbear server too */
+  * but there's an interface via a PAM module. It won't work for more complex
+  * PAM challenge/response.
+  * You can't enable both PASSWORD and PAM. */
++
++/* This requires crypt() */
++#ifdef HAVE_CRYPT
++#ifndef DROPBEAR_SVR_PASSWORD_AUTH
++#define DROPBEAR_SVR_PASSWORD_AUTH 1
++#endif
++#else
++#ifndef DROPBEAR_SVR_PASSWORD_AUTH
++#define DROPBEAR_SVR_PASSWORD_AUTH 0
++#endif
++#endif
++/* PAM requires ./configure --enable-pam */
++#ifndef DROPBEAR_SVR_PAM_AUTH
+ #define DROPBEAR_SVR_PAM_AUTH 0
++#endif
+ 
+ /* ~/.ssh/authorized_keys authentication */
+ #define DROPBEAR_SVR_PUBKEY_AUTH 1
+diff --git a/gensignkey.c b/gensignkey.c
+index 8317fea..4006e60 100644
+--- a/gensignkey.c
++++ b/gensignkey.c
+@@ -140,6 +140,16 @@ int signkey_generate(enum signkey_type keytype, int bits, const char* filename,
+ 		goto out;
+ 	}
+ 
++#ifdef DEBIAN_NOROOT
++	/* Hard links are not possible and renam. */
++	if (skip_exist && access(filename, F_OK) == 0) {
++		/* Ok. */
++	} else if (rename(fn_temp, filename) < 0) {
++		dropbear_log(LOG_ERR, "Failed moving key file to %s: %s", filename,
++			strerror(errno));
++		ret = DROPBEAR_FAILURE;
++	}
++#else
+ 	if (link(fn_temp, filename) < 0) {
+ 		/* If generating keys on connection (skipexist) it's OK to get EEXIST 
+ 		- we probably just lost a race with another connection to generate the key */
+@@ -151,6 +161,7 @@ int signkey_generate(enum signkey_type keytype, int bits, const char* filename,
+ 			goto out;
+ 		}
+ 	}
++#endif
+ 
+ out:
+ 	if (buf) {
+diff --git a/signkey.c b/signkey.c
+index 88f06c7..150be82 100644
+--- a/signkey.c
++++ b/signkey.c
+@@ -624,6 +624,7 @@ int cmp_base64_key(const unsigned char* keyblob, unsigned int keybloblen,
+ out:
+ 	buf_free(decodekey);
+ 	decodekey = NULL;
++	TRACE(("cmp_base64_key: ret=%d",ret))
+ 	return ret;
+ }
+ #endif
+diff --git a/sshpty.c b/sshpty.c
+index fceb7fd..eff9758 100644
+--- a/sshpty.c
++++ b/sshpty.c
+@@ -17,6 +17,17 @@
+ 
+ /*RCSID("OpenBSD: sshpty.c,v 1.7 2002/06/24 17:57:20 deraadt Exp ");*/
+ 
++#ifdef DEBIAN_NOROOT
++#undef HAVE__GETPTY
++#undef HAVE_OPENPTY
++#define HAVE_DEV_PTMX
++#define USE_DEV_PTMX 1
++#endif
++
++#if defined(USE_DEV_PTMX)
++#define _XOPEN_SOURCE
++#endif
++
+ #include "includes.h"
+ #include "dbutil.h"
+ #include "errno.h"
+@@ -133,6 +144,7 @@ pty_allocate(int *ptyfd, int *ttyfd, char *namebuf, int namebuflen)
+ 		close(*ptyfd);
+ 		return 0;
+ 	}
++#ifndef DEBIAN_NOROOT
+ #if !defined(HAVE_CYGWIN) && defined(I_PUSH)
+ 	/*
+ 	 * Push the appropriate streams modules, as described in Solaris pts(7).
+@@ -153,6 +165,7 @@ pty_allocate(int *ptyfd, int *ttyfd, char *namebuf, int namebuflen)
+ 	}
+ #endif
+ #endif
++#endif  /* DEBIAN_NOROOT */
+ 	return 1;
+ #else /* USE_DEV_PTMX */
+ #ifdef HAVE_DEV_PTS_AND_PTC
+@@ -247,6 +260,7 @@ pty_allocate(int *ptyfd, int *ttyfd, char *namebuf, int namebuflen)
+ void
+ pty_release(const char *tty_name)
+ {
++#ifndef DEBIAN_NOROOT
+ 	if (chown(tty_name, (uid_t) 0, (gid_t) 0) < 0
+ 			&& (errno != ENOENT)) {
+ 		dropbear_log(LOG_ERR,
+@@ -257,6 +271,7 @@ pty_release(const char *tty_name)
+ 		dropbear_log(LOG_ERR,
+ 			"chmod %.100s 0666 failed: %.100s", tty_name, strerror(errno));
+ 	}
++#endif
+ }
+ 
+ /* Makes the tty the processes controlling tty and sets it to sane modes. */
+@@ -380,6 +395,7 @@ pty_setowner(struct passwd *pw, const char *tty_name)
+ 				tty_name, strerror(errno));
+ 	}
+ 
++#ifndef DEBIAN_NOROOT
+ 	if (st.st_uid != pw->pw_uid || st.st_gid != gid) {
+ 		if (chown(tty_name, pw->pw_uid, gid) < 0) {
+ 			if (errno == EROFS &&
+@@ -409,4 +425,5 @@ pty_setowner(struct passwd *pw, const char *tty_name)
+ 			}
+ 		}
+ 	}
++#endif /* DEBIAN_NOROOT */
+ }
+diff --git a/svr-agentfwd.c b/svr-agentfwd.c
+index 37c30b0..54e1d4e 100644
+--- a/svr-agentfwd.c
++++ b/svr-agentfwd.c
+@@ -219,10 +219,12 @@ static int bindagent(int fd, struct ChanSess * chansess) {
+ 	/* drop to user privs to make the dir/file */
+ 	uid = getuid();
+ 	gid = getgid();
++#ifndef DEBIAN_NOROOT
+ 	if ((setegid(ses.authstate.pw_gid)) < 0 ||
+ 		(seteuid(ses.authstate.pw_uid)) < 0) {
+ 		dropbear_exit("Failed to set euid");
+ 	}
++#endif /* DEBIAN_NOROOT */
+ 
+ 	memset((void*)&addr, 0x0, sizeof(addr));
+ 	addr.sun_family = AF_UNIX;
+diff --git a/svr-authpubkey.c b/svr-authpubkey.c
+index ae1402d..b644f84 100644
+--- a/svr-authpubkey.c
++++ b/svr-authpubkey.c
+@@ -381,6 +381,7 @@ static int checkpubkey(const char* algo, unsigned int algolen,
+ 
+ 		ret = checkpubkey_line(line, line_num, filename, algo, algolen, keyblob, keybloblen);
+ 		if (ret == DROPBEAR_SUCCESS) {
++			TRACE(("checkpubkey: pubkey auth OK."))
+ 			break;
+ 		}
+ 
